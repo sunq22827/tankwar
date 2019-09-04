@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GameClient extends JComponent {
@@ -12,11 +13,18 @@ public class GameClient extends JComponent {
     private Tank playerTank;
     private List<Tank> enemyTanks;
 
-//    private List<Wall> wa1ls;
+    private List<Wall> wa1ls;
 
     public GameClient() {
         this.playerTank = new Tank(400,100,Direction.DOWN);
         this.enemyTanks = new ArrayList<Tank>(12);
+        this.wa1ls = Arrays.asList(
+                new Wall(200, 40, true, 15),
+                new Wall(200, 540, true, 15),
+                new Wall(100, 80, false, 15),
+                new Wall(700, 80, false, 15)
+        );
+
         for (int i = 0; i < 3; i++) {
             for(int j = 0; j < 4; j++){
                 this.enemyTanks.add(new Tank(240 + j * 100, 400 + i * 40, true, Direction.UP));
@@ -28,9 +36,14 @@ public class GameClient extends JComponent {
 
     @Override
     protected void paintComponent(Graphics g) {
+        g.setColor(Color.BLACK);
+        g.fillRect(0,0,800,600);
         playerTank.draw(g);
         for(Tank tank: enemyTanks) {
             tank.draw(g);
+        }
+        for (Wall wall: wa1ls) {
+            wall.draw(g);
         }
     }
 
