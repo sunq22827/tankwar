@@ -68,6 +68,7 @@ public class GameClient extends JComponent {
     }
 
     public static void main(String[] args) {
+        com.sun.javafx.application.PlatformImpl.startup(()->{});
 
         JFrame frame = new JFrame();
         frame.setTitle("有意思的坦克大战游戏");
